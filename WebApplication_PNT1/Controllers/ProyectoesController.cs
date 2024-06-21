@@ -54,7 +54,7 @@ namespace WebApplication_PNT1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProyecto,Descripcion,Ancho,Alto,Groso,FechaPedido,Tipo")] Proyecto proyecto)
+        public async Task<IActionResult> Create([Bind("IdProyecto,Descripcion,Ancho,Alto,Groso,CantColores,Cantidad,FechaPedido,Tipo")] Proyecto proyecto)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace WebApplication_PNT1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProyecto,Descripcion,Ancho,Alto,Groso,FechaPedido,Tipo")] Proyecto proyecto)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProyecto,Descripcion,Ancho,Alto,Groso,CantColores,Cantidad,FechaPedido,Tipo")] Proyecto proyecto)
         {
             if (id != proyecto.IdProyecto)
             {
