@@ -20,6 +20,9 @@ namespace WebApplication_PNT1.Models
 
          public int Cantidad { get; set; }
 
+        public int? PedidoId { get; set; }
+        public Pedido? Pedido { get; set; }
+
         public DateTime FechaPedido { get; set; }
         [EnumDataType(typeof(TipoProyecto))]
         public TipoProyecto Tipo { get; set; }

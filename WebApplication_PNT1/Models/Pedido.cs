@@ -3,6 +3,8 @@
     public class Pedido
     {
         public int IdPedido { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public string Estado { get; set; }
 
         public List<Proyecto> Proyectos { get; set; } = new List<Proyecto>();
 

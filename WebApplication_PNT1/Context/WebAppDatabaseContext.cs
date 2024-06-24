@@ -14,7 +14,23 @@ namespace WebApplication_PNT1.Context
         {
         }
         public DbSet<Proyecto> Proyectos { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Pedido>()
+                .HasKey(p => p.IdPedido);
+            modelBuilder.Entity<Proyecto>()
+                .HasKey(p => p.IdProyecto);
+
+            // Configurar la relación entre Pedido y Proyecto
+            modelBuilder.Entity<Proyecto>()
+                .HasOne(p => p.Pedido)
+                .WithMany(b => b.Proyectos)
+                .HasForeignKey(p => p.PedidoId);
+        }
     }
 }
 

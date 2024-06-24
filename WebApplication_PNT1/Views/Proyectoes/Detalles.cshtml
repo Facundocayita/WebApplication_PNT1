@@ -1,0 +1,64 @@
+﻿namespace WebApplication_PNT1.Views.Proyectoes
+@model WebApplication_PNT1.Models.Pedido
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalle</h1>
+
+<div>
+    <h4>Pedido</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Fecha de Creacion
+        </dt>
+        <dd class="col-sm-10">
+            @Model.FechaCreacion
+        </dd>
+        <dt class="col-sm-2">
+            Estado
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Estado
+        </dd>
+    </dl>
+</div>
+
+<h4>Proyectos</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descripción</th>
+            <th>Ancho</th>
+            <th>Alto</th>
+            <th>Grosor</th>
+            <th>Cantidad de Colores</th>
+            <th>Cantidad</th>
+            <th>Fecha Pedido</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var proyecto in Model.Proyectos)
+        {
+            <tr>
+                <td>@proyecto.Descripcion</td>
+                <td>@proyecto.Ancho</td>
+                <td>@proyecto.Alto</td>
+                <td>@proyecto.Groso</td>
+                <td>@proyecto.CantColores</td>
+                <td>@proyecto.Cantidad</td>
+                <td>@proyecto.FechaPedido</td>
+                <td>@proyecto.Tipo</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+    <a asp-action="Confirm" asp-route-id="@Model.IdPedido" class="btn btn-success">Confirmar</a>
+    <a asp-action="Anular" asp-route-id="@Model.IdPedido" class="btn btn-danger">Anular</a>
+</div>

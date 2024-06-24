@@ -60,8 +60,9 @@ namespace WebApplication_PNT1.Controllers
             {
                 _context.Add(proyecto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Pedido", new { id = proyecto.PedidoId });
             }
+            ViewBag.Pedidos = new SelectList(_context.Pedidos, "IdPedido", "Descripcion", proyecto.PedidoId);
             return View(proyecto);
         }
 
