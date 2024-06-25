@@ -12,22 +12,36 @@ namespace WebApplication_PNT1.Models
         public int IdProyecto { get; set; }
         public required string Descripcion { get; set; }
 
+        [Display(Name = "Ancho en cm")]
         public double Ancho { get; set; }
+
+        [Display(Name = "Alto en cm")]
         public double Alto { get; set; }
+
+        [Display(Name = "Grosor en cm")]
         public double Groso { get; set; }
 
+        [Display(Name = "Cantidad de colores")]
         public int CantColores { get; set; } // VER FUNCIONALIDAD EN LA VISTA PARA AGREGAR COLORES CLIQUEANDO O MANDANDO VALOR NUMERICO
-
-         public int Cantidad { get; set; }
+        
+        
+        [Display(Name = "Cantidad de unidades")]
+        public int Cantidad { get; set; }
 
         public int? PedidoId { get; set; }
         public Pedido? Pedido { get; set; }
 
+
+        [Display(Name = "Fecha")]
         public DateTime FechaPedido { get; set; }
         [EnumDataType(typeof(TipoProyecto))]
         public TipoProyecto Tipo { get; set; }
 
+
+        [Display(Name = "Precio por unidad")]
         public double CostoUnitario { get; set; }
+
+        [Display(Name = "Precio Total")]
         public double CostoTotal { get; set; }
 
 

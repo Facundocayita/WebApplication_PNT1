@@ -20,3 +20,14 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.costo::before {
+    content: '$';
+    font-weight: bold;
+}
+
+.costo {
+    font-weight: bold;
+}
+
