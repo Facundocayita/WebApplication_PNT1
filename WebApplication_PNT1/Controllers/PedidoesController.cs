@@ -10,22 +10,22 @@ using WebApplication_PNT1.Models;
 
 namespace WebApplication_PNT1.Controllers
 {
-    public class ProyectoesController : Controller
+    public class PedidoesController : Controller
     {
         private readonly WebAppDatabaseContext _context;
 
-        public ProyectoesController(WebAppDatabaseContext context)
+        public PedidoesController(WebAppDatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: Proyectoes
+        // GET: Pedidoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Proyectos.ToListAsync());
+            return View(await _context.Pedidos.ToListAsync());
         }
 
-        // GET: Proyectoes/Details/5
+        // GET: Pedidoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,41 +33,40 @@ namespace WebApplication_PNT1.Controllers
                 return NotFound();
             }
 
-            var proyecto = await _context.Proyectos
-                .FirstOrDefaultAsync(m => m.IdProyecto == id);
-            if (proyecto == null)
+            var pedido = await _context.Pedidos
+                .FirstOrDefaultAsync(m => m.IdPedido == id);
+            if (pedido == null)
             {
                 return NotFound();
             }
 
-            return View(proyecto);
+            return View(pedido);
         }
 
-        // GET: Proyectoes/Create
+        // GET: Pedidoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Proyectoes/Create
+        // POST: Pedidoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProyecto,Descripcion,Ancho,Alto,Groso,CantColores,Cantidad,FechaPedido,Tipo")] Proyecto proyecto)
+        public async Task<IActionResult> Create([Bind("IdPedido,FechaCreacion,Estado")] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
-                proyecto.SetCostos();
-                _context.Add(proyecto);
+             
+                _context.Add(pedido);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Pedido", new { id = proyecto.PedidoId });
+                return RedirectToAction(nameof(Index));
             }
-            ViewBag.Pedidos = new SelectList(_context.Pedidos, "IdPedido", "Descripcion", proyecto.PedidoId);
-            return View(proyecto);
+            return View(pedido);
         }
 
-        // GET: Proyectoes/Edit/5
+        // GET: Pedidoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +74,22 @@ namespace WebApplication_PNT1.Controllers
                 return NotFound();
             }
 
-            var proyecto = await _context.Proyectos.FindAsync(id);
-            if (proyecto == null)
+            var pedido = await _context.Pedidos.FindAsync(id);
+            if (pedido == null)
             {
                 return NotFound();
             }
-            return View(proyecto);
+            return View(pedido);
         }
 
-        // POST: Proyectoes/Edit/5
+        // POST: Pedidoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProyecto,Descripcion,Ancho,Alto,Groso,CantColores,Cantidad,FechaPedido,Tipo")] Proyecto proyecto)
+        public async Task<IActionResult> Edit(int id, [Bind("IdPedido,FechaCreacion,Estado")] Pedido pedido)
         {
-            if (id != proyecto.IdProyecto)
+            if (id != pedido.IdPedido)
             {
                 return NotFound();
             }
@@ -99,13 +98,12 @@ namespace WebApplication_PNT1.Controllers
             {
                 try
                 {
-                    proyecto.SetCostos();
-                    _context.Update(proyecto);
+                    _context.Update(pedido);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProyectoExists(proyecto.IdProyecto))
+                    if (!PedidoExists(pedido.IdPedido))
                     {
                         return NotFound();
                     }
@@ -116,10 +114,10 @@ namespace WebApplication_PNT1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(proyecto);
+            return View(pedido);
         }
 
-        // GET: Proyectoes/Delete/5
+        // GET: Pedidoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,34 +125,34 @@ namespace WebApplication_PNT1.Controllers
                 return NotFound();
             }
 
-            var proyecto = await _context.Proyectos
-                .FirstOrDefaultAsync(m => m.IdProyecto == id);
-            if (proyecto == null)
+            var pedido = await _context.Pedidos
+                .FirstOrDefaultAsync(m => m.IdPedido == id);
+            if (pedido == null)
             {
                 return NotFound();
             }
 
-            return View(proyecto);
+            return View(pedido);
         }
 
-        // POST: Proyectoes/Delete/5
+        // POST: Pedidoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var proyecto = await _context.Proyectos.FindAsync(id);
-            if (proyecto != null)
+            var pedido = await _context.Pedidos.FindAsync(id);
+            if (pedido != null)
             {
-                _context.Proyectos.Remove(proyecto);
+                _context.Pedidos.Remove(pedido);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProyectoExists(int id)
+        private bool PedidoExists(int id)
         {
-            return _context.Proyectos.Any(e => e.IdProyecto == id);
+            return _context.Pedidos.Any(e => e.IdPedido == id);
         }
     }
 }

@@ -27,19 +27,22 @@ namespace WebApplication_PNT1.Models
         [EnumDataType(typeof(TipoProyecto))]
         public TipoProyecto Tipo { get; set; }
 
+        public double CostoUnitario { get; set; }
+        public double CostoTotal { get; set; }
+
 
         public double CalcularCosto()
         {
-            // Obtiene el costo base según el tipo de proyecto
+            
             double costoBase = Tipo.GetCostoBase();
 
-            // Calcula el tamaño del proyecto
+           
             double tamaño = Ancho * Alto * Groso;
 
-            // Define un factor para el costo por color
+           
             double costoPorColor = 20.0;
 
-            // Calcula el costo total
+            
             double costoUnitario = costoBase + (tamaño * 0.1) + (CantColores * costoPorColor);
 
             return costoUnitario;
@@ -52,10 +55,14 @@ namespace WebApplication_PNT1.Models
             return costoTotal;
         }
 
-        public double getCostoTotal() {
-            return CalcularCostoTotal();
 
+        public void SetCostos()
+        {
+            CostoUnitario = CalcularCosto();
+            CostoTotal = CalcularCostoTotal();
         }
+
+ 
     }
 }
 

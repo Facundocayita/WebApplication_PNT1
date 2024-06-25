@@ -4,7 +4,7 @@
     {
         public int IdPedido { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public string Estado { get; set; }
+        public string Estado { get; set; } // Cambiar a valor enum
 
         public List<Proyecto> Proyectos { get; set; } = new List<Proyecto>();
 

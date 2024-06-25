@@ -2,9 +2,79 @@
     ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">PrinterCalculator</h1>
-    <p>Mira nuestro <a href="https://plasticmonkey3d.ar/">market</a>.</p>
-    <p> Tenemos productos coleccionables, consolas retro y deco 3-D.</p>
-    <p>Aquí vas a poder presupuestar tu proyecto personalizado, hacer tu pedido y solicitar el envío.</p>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - PrinterCalculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #343a40;
+        }
+
+        .home-container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #f8f9fa;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+            .home-container img {
+                max-width: 150px;
+                margin-bottom: 20px;
+            }
+
+        .home-header {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+
+        .home-description {
+            font-size: 1.2em;
+            color: #6c757d;
+        }
+
+        .home-link a {
+            color: #ff7f00; /* Color Naranja */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .home-link a:hover {
+                text-decoration: underline;
+            }
+
+        .btn-orange {
+            background-color: #ff7f00; /* Color Naranja */
+            color: #ffffff;
+            border: none;
+        }
+
+            .btn-orange:hover {
+                background-color: #e67300; /* Color Naranja más oscuro */
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="home-container">
+            <img src="~/Images/Logo_Naranja_SinTexto.jpeg" alt="PrinterCalculator" />
+            <h1 class="home-header">PrinterCalculator</h1>
+            <p class="home-description">Tenemos productos coleccionables, consolas retro y deco 3-D.</p>
+            <p class="home-description">Aquí vas a poder presupuestar tu proyecto personalizado, hacer tu pedido y solicitar el envío.</p>
+            <a href="https://plasticmonkey3d.ar/" target="_blank" class="btn btn-orange">Visitar Market</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

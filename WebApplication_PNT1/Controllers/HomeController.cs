@@ -18,7 +18,7 @@ namespace WebApplication_PNT1.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Contacto()
         {
             return View();
         }
