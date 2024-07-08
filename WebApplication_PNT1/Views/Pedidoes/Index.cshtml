@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Pedidos</h2>
+<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Crear nuevo</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -16,7 +16,25 @@
                 @Html.DisplayNameFor(model => model.FechaCreacion)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DireccionEntrega)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEntrega)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observaciones)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proyecto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoEntrega)
             </th>
             <th></th>
         </tr>
@@ -28,12 +46,30 @@
                 @Html.DisplayFor(modelItem => item.FechaCreacion)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Cliente)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPedido">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPedido">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPedido">Eliminar</a>
+                @Html.DisplayFor(modelItem => item.DireccionEntrega)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaEntrega)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proyecto.IdProyecto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoEntrega)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdPedido">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdPedido">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdPedido">Delete</a>
             </td>
         </tr>
 }

@@ -25,12 +25,14 @@ namespace WebApplication_PNT1.Context
             modelBuilder.Entity<Proyecto>()
                 .HasKey(p => p.IdProyecto);
 
-            // Configurar la relación entre Pedido y Proyecto
-            modelBuilder.Entity<Proyecto>()
-                .HasOne(p => p.Pedido)
-                .WithMany(b => b.Proyectos)
-                .HasForeignKey(p => p.PedidoId);
+            // Configurar la relación uno a uno entre Pedido y Proyecto
+            modelBuilder.Entity<Pedido>()
+                .HasOne(p => p.Proyecto)
+                .WithOne(p => p.Pedido)
+                .HasForeignKey<Pedido>(p => p.ProyectoId)
+                .OnDelete(DeleteBehavior.Cascade); // Configuración de eliminación en cascada (opcional)
         }
     }
-}
+    }
+
 

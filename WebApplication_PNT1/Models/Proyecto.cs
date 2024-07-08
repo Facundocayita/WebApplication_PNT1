@@ -9,7 +9,7 @@ namespace WebApplication_PNT1.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdProyecto { get; set; }
+        public int? IdProyecto { get; set; }
         public required string Descripcion { get; set; }
 
         [Display(Name = "Ancho en cm")]
@@ -28,21 +28,26 @@ namespace WebApplication_PNT1.Models
         [Display(Name = "Cantidad de unidades")]
         public int Cantidad { get; set; }
 
-        public int? PedidoId { get; set; }
         public Pedido? Pedido { get; set; }
 
 
         [Display(Name = "Fecha")]
         public DateTime FechaPedido { get; set; }
+
         [EnumDataType(typeof(TipoProyecto))]
         public TipoProyecto Tipo { get; set; }
 
 
         [Display(Name = "Precio por unidad")]
+        [DataType(DataType.Currency)]
         public double CostoUnitario { get; set; }
 
         [Display(Name = "Precio Total")]
+        [DataType(DataType.Currency)]
         public double CostoTotal { get; set; }
+
+        [EnumDataType(typeof(EstadoProyecto))]
+        public EstadoProyecto Estado { get; set; }
 
 
         public double CalcularCosto()
@@ -69,6 +74,8 @@ namespace WebApplication_PNT1.Models
             return costoTotal;
         }
 
+  
+
 
         public void SetCostos()
         {
@@ -76,7 +83,12 @@ namespace WebApplication_PNT1.Models
             CostoTotal = CalcularCostoTotal();
         }
 
- 
+        public void SetEstadoInicial()
+        {
+            Estado = EstadoProyecto.Presupuestado;
+        }
+       
+
     }
 }
 

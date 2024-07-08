@@ -12,8 +12,8 @@ using WebApplication_PNT1.Context;
 namespace WebApplication_PNT1.Migrations
 {
     [DbContext(typeof(WebAppDatabaseContext))]
-    [Migration("20240625015040_ProyectoCOnAtributos_CostoUni_CostoTotal")]
-    partial class ProyectoCOnAtributos_CostoUni_CostoTotal
+    [Migration("20240707160914_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,25 +33,51 @@ namespace WebApplication_PNT1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPedido"));
 
-                    b.Property<string>("Estado")
+                    b.Property<string>("Cliente")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("CostoTotal")
+                        .HasColumnType("float");
+
+                    b.Property<string>("DireccionEntrega")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("FechaEntrega")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Observaciones")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProyectoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoEntrega")
+                        .HasColumnType("int");
+
                     b.HasKey("IdPedido");
+
+                    b.HasIndex("ProyectoId")
+                        .IsUnique()
+                        .HasFilter("[ProyectoId] IS NOT NULL");
 
                     b.ToTable("Pedidos");
                 });
 
             modelBuilder.Entity("WebApplication_PNT1.Models.Proyecto", b =>
                 {
-                    b.Property<int>("IdProyecto")
+                    b.Property<int?>("IdProyecto")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProyecto"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("IdProyecto"));
 
                     b.Property<double>("Alto")
                         .HasColumnType("float");
@@ -75,37 +101,36 @@ namespace WebApplication_PNT1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("FechaPedido")
                         .HasColumnType("datetime2");
 
                     b.Property<double>("Groso")
                         .HasColumnType("float");
 
-                    b.Property<int?>("PedidoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Tipo")
                         .HasColumnType("int");
 
                     b.HasKey("IdProyecto");
 
-                    b.HasIndex("PedidoId");
-
                     b.ToTable("Proyectos");
-                });
-
-            modelBuilder.Entity("WebApplication_PNT1.Models.Proyecto", b =>
-                {
-                    b.HasOne("WebApplication_PNT1.Models.Pedido", "Pedido")
-                        .WithMany("Proyectos")
-                        .HasForeignKey("PedidoId");
-
-                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("WebApplication_PNT1.Models.Pedido", b =>
                 {
-                    b.Navigation("Proyectos");
+                    b.HasOne("WebApplication_PNT1.Models.Proyecto", "Proyecto")
+                        .WithOne("Pedido")
+                        .HasForeignKey("WebApplication_PNT1.Models.Pedido", "ProyectoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Proyecto");
+                });
+
+            modelBuilder.Entity("WebApplication_PNT1.Models.Proyecto", b =>
+                {
+                    b.Navigation("Pedido");
                 });
 #pragma warning restore 612, 618
         }

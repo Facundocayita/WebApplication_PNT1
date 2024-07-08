@@ -22,7 +22,9 @@ namespace WebApplication_PNT1.Controllers
         // GET: Pedidoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pedidos.ToListAsync());
+            var webAppDatabaseContext = _context.Pedidos.Include(p => p.Proyecto);
+            return View(await webAppDatabaseContext.ToListAsync());
+            //return View(await _context.Pedidos.ToListAsync());
         }
 
         // GET: Pedidoes/Details/5
@@ -34,6 +36,7 @@ namespace WebApplication_PNT1.Controllers
             }
 
             var pedido = await _context.Pedidos
+                .Include(p => p.Proyecto)
                 .FirstOrDefaultAsync(m => m.IdPedido == id);
             if (pedido == null)
             {
@@ -43,10 +46,26 @@ namespace WebApplication_PNT1.Controllers
             return View(pedido);
         }
 
-        // GET: Pedidoes/Create
-        public IActionResult Create()
+        // GET: Pedido/Create
+        public IActionResult Create([]Proyecto proyecto)
         {
-            return View();
+           
+            // var proyecto = _context.Proyectos.Find(proyectoId);
+            if (proyecto == null)
+            {
+                return NotFound("El proyecto especificado no existe.");
+            }
+
+            var pedido = new Pedido
+
+            {
+                ProyectoId = proyecto.IdProyecto,
+                FechaCreacion = DateTime.Now,
+                Proyecto = proyecto,
+
+            };
+
+            return View(pedido);
         }
 
         // POST: Pedidoes/Create
@@ -54,15 +73,33 @@ namespace WebApplication_PNT1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdPedido,FechaCreacion,Estado")] Pedido pedido)
+        public async Task<IActionResult> Create([Bind("IdPedido,FechaCreacion,Cliente,DireccionEntrega,Observaciones,TipoEntrega,Proyecto,ProyectoId")] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
-             
+                var proyecto = await _context.Proyectos.FindAsync(pedido.ProyectoId);
+
+                if (proyecto == null)
+                {
+                    ModelState.AddModelError(string.Empty, "El proyecto especificado no existe.");
+                    return View(pedido);
+                }
+
+                // Realiza los cálculos necesarios usando el proyecto
+                pedido.SetCostoTotal(proyecto);
+                pedido.SetFechaEntrega();
+                pedido.SetEstado(EstadoPedido.Pendiente);
+
                 _context.Add(pedido);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", new { id = pedido.IdPedido });
             }
+
+
+            // Para depuración, agrega errores de ModelState a ViewData o ViewBag
+            var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+            ViewBag.Errors = allErrors;
+
             return View(pedido);
         }
 
@@ -79,6 +116,7 @@ namespace WebApplication_PNT1.Controllers
             {
                 return NotFound();
             }
+            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "IdProyecto", "IdProyecto", pedido.ProyectoId);
             return View(pedido);
         }
 
@@ -87,7 +125,7 @@ namespace WebApplication_PNT1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdPedido,FechaCreacion,Estado")] Pedido pedido)
+        public async Task<IActionResult> Edit(int id, [Bind("IdPedido,FechaCreacion,Cliente,Estado,DireccionEntrega,FechaEntrega,Observaciones,ProyectoId,TipoEntrega")] Pedido pedido)
         {
             if (id != pedido.IdPedido)
             {
@@ -114,6 +152,7 @@ namespace WebApplication_PNT1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "IdProyecto", "IdProyecto", pedido.ProyectoId);
             return View(pedido);
         }
 
@@ -126,6 +165,7 @@ namespace WebApplication_PNT1.Controllers
             }
 
             var pedido = await _context.Pedidos
+                .Include(p => p.Proyecto)
                 .FirstOrDefaultAsync(m => m.IdPedido == id);
             if (pedido == null)
             {
