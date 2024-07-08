@@ -47,10 +47,16 @@ namespace WebApplication_PNT1.Controllers
         }
 
         // GET: Pedido/Create
-        public IActionResult Create([]Proyecto proyecto)
+        public IActionResult Create(int? ProyectoId)
         {
            
-            // var proyecto = _context.Proyectos.Find(proyectoId);
+            if (ProyectoId == null)
+            {
+                return NotFound("El IdProyecto especificado no es válido.");
+            }
+
+            var proyecto = _context.Proyectos.Find(ProyectoId);
+
             if (proyecto == null)
             {
                 return NotFound("El proyecto especificado no existe.");

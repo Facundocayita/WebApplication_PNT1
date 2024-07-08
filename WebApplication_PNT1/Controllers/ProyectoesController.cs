@@ -67,7 +67,7 @@ namespace WebApplication_PNT1.Controllers
                 proyecto.SetEstadoInicial();
                 _context.Add(proyecto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details", proyecto);
+                return RedirectToAction("Details", new {id = proyecto.IdProyecto});
             }
             return View(proyecto);
         }
@@ -81,6 +81,7 @@ namespace WebApplication_PNT1.Controllers
             }
 
             var proyecto = await _context.Proyectos.FindAsync(id);
+
             if (proyecto == null)
             {
                 return NotFound();
