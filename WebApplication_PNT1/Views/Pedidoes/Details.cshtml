@@ -4,63 +4,100 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h2>Detalle</h2>
 
-<div>
+<div class="details-container">
     <h4>Pedido</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-6">
             @Html.DisplayNameFor(model => model.FechaCreacion)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.FechaCreacion)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-6">
             @Html.DisplayNameFor(model => model.Cliente)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.Cliente)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-6">
             @Html.DisplayNameFor(model => model.Estado)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.Estado)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-6">
             @Html.DisplayNameFor(model => model.DireccionEntrega)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.DireccionEntrega)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-6">
             @Html.DisplayNameFor(model => model.FechaEntrega)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.FechaEntrega)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-6">
             @Html.DisplayNameFor(model => model.Observaciones)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.Observaciones)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-6">
             @Html.DisplayNameFor(model => model.Proyecto)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Proyecto.IdProyecto)
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Proyecto.Descripcion)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-6">
             @Html.DisplayNameFor(model => model.TipoEntrega)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.TipoEntrega)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.FechaEntrega)
+        </dt>
+        <dd class="col-sm-6">
+            <strong>@Html.DisplayFor(model => model.FechaEntrega)</strong>
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.CostoTotal)
+        </dt>
+        <dd class="col-sm-6">
+            <strong>@Html.DisplayFor(model => model.CostoTotal)</strong>
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdPedido">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdPedido" class="btn btn-apple-green">EDITAR</a> |
+    <a asp-action="Index" class="btn btn-secondary">VOLVER</a>
 </div>
+
+<style>
+    .btn-apple-green {
+        background-color: #8DB600;
+        color: white;
+        border: none;
+    }
+
+        .btn-apple-green:hover {
+            background-color: #7AA300;
+        }
+
+    .details-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: rgba(248, 249, 250, 0.85); /* Fondo semi-transparente */
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+        .details-container dl dt, .details-container dl dd {
+            vertical-align: middle;
+        }
+</style>

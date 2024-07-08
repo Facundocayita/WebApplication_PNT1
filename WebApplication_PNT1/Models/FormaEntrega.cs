@@ -5,7 +5,7 @@ namespace WebApplication_PNT1.Models
 {
     public enum FormaEntrega
     {
-        [Display(Name = "Envió común(3 a 4 días hábiles")]
+        [Display(Name = "Envió común (3 a 4 días hábiles)")]
         [CostoBase(1000.0)]
         EnvioComun,
 

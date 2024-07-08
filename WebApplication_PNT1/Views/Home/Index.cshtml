@@ -39,7 +39,24 @@
             font-size: 2.5em;
             margin-bottom: 20px;
             color: #343a40;
+            position: relative;
         }
+
+            .home-header::before, .home-header::after {
+                content: url('~/Images/Logo_Naranja_SinTexto.jpeg');
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                max-width: 50px; /* Ajustar el tamaño de la imagen según sea necesario */
+            }
+
+            .home-header::before {
+                left: -60px; /* Ajustar la distancia según sea necesario */
+            }
+
+            .home-header::after {
+                right: -60px; /* Ajustar la distancia según sea necesario */
+            }
 
         .home-description {
             font-size: 1.2em;
@@ -70,7 +87,7 @@
 <body>
     <div class="container">
         <div class="home-container">
-            <img src="~/Images/Logo_Naranja_SinTexto.jpeg" alt="PrinterCalculator" />
+            
             <h2 class="home-header">PrinterCalculator</h2>
             <p class="home-description">En esta página vas a poder presupuestar tu proyecto personalizado, hacer tu pedido y solicitar el envío.</p>
             <p class="home-description">También podes visitar nuestro Market. Tenemos productos coleccionables, consolas retro y deco 3-D.</p>

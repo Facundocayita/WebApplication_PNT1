@@ -4,83 +4,125 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Tu Proyecto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        .btn-apple-green {
+            background-color: #8DB600;
+            color: white;
+            border: none;
+        }
 
-<div>
-    <h4>Proyecto</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ancho)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ancho)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Alto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Alto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Groso)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Groso)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CantColores)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CantColores)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaPedido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaPedido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tipo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tipo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CostoUnitario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CostoUnitario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CostoTotal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CostoTotal)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdProyecto">Edit</a> |
-    <a asp-action="Index">Volver a la lista</a>
+            .btn-apple-green:hover {
+                background-color: #7AA300;
+            }
 
-    <a asp-action="Details" asp-route-id="@Model?.IdProyecto" asp-route-redirectToCreatePedido="true" class="btn btn-primary">Hacer pedido</a>
-</div>
+        .details-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .details-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .details-info dt {
+            font-weight: bold;
+        }
+
+        .details-info dd {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="details-container">
+            <h2 class="details-header">Detalle del Proyecto</h2>
+            <dl class="row details-info">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Descripcion)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Ancho)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Ancho)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Alto)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Alto)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Groso)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Groso)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.CantColores)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.CantColores)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Cantidad)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Cantidad)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.FechaPedido)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.FechaPedido)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Tipo)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.CostoUnitario)
+                </dt>
+                <dd class="col-sm-9">
+                    <strong>@Html.DisplayFor(model => model.CostoUnitario)</strong>
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.CostoTotal)
+                </dt>
+                <dd class="col-sm-9">
+                    <strong>@Html.DisplayFor(model => model.CostoTotal)</strong>
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Estado)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
+            </dl>
+            <div class="text-center">
+                <a asp-action="Edit" asp-route-id="@Model?.IdProyecto" class="btn btn-apple-green">Editar</a>
+                <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                <a asp-action="Details" asp-route-id="@Model?.IdProyecto" asp-route-redirectToCreatePedido="true" class="btn btn-primary">Hacer pedido</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
